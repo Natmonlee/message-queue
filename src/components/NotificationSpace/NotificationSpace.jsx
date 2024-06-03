@@ -1,13 +1,13 @@
 import "./NotificationSpace.css";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import db from "../../firebase/firebase";
 import { useEffect } from "react";
 import { syncMessages } from "../../redux/actions/messageActions";
 
 export function NotificationSpace({ currentMessages }) {
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const queryData = query(collection(db, "messages"));
     const unsubscribe = onSnapshot(queryData, (querySnapshot) => {
@@ -15,15 +15,15 @@ export function NotificationSpace({ currentMessages }) {
       querySnapshot.forEach((message) => {
         databaseMessages.push({
           text: message.data().text,
-          id: message.data().id,
+          id: message.id,
         });
       });
-      syncMessages(databaseMessages);
+      dispatch(syncMessages(databaseMessages));
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div id="notification-space">
