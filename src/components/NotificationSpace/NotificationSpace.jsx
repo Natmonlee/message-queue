@@ -1,7 +1,7 @@
 import "./NotificationSpace.css";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import db from "../../firebase/firebase";
 import { useEffect } from "react";
 import { syncMessages } from "../../redux/actions/messageActions";
@@ -9,7 +9,10 @@ import { syncMessages } from "../../redux/actions/messageActions";
 export function NotificationSpace({ currentMessages }) {
   const dispatch = useDispatch();
   useEffect(() => {
-    const queryData = query(collection(db, "messages"));
+    const queryData = query(
+      collection(db, "messages"),
+      orderBy("timestamp", "asc")
+    );
     const unsubscribe = onSnapshot(queryData, (querySnapshot) => {
       const databaseMessages = [];
       querySnapshot.forEach((message) => {
