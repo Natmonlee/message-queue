@@ -2,10 +2,20 @@ import "./InputForm.css";
 import { addMessage } from "../../redux/actions/messageActions";
 import { addData } from "../../firebase/firestoreActions";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import idGenerator from "../../utilities/idGenerator";
 
 function InputForm() {
+  useEffect(() => {
+    document
+      .getElementById("text-input")
+      .addEventListener("keypress", (event) => {
+        event.key === "Enter"
+          ? document.getElementById("submit").click()
+          : null;
+      });
+  });
+
   const [textInput, setTextInput] = useState("");
   const dispatch = useDispatch();
 
@@ -21,7 +31,7 @@ function InputForm() {
   };
 
   return (
-    <>
+    <div id="input">
       <input
         type="text"
         placeholder="Enter Your Message Here"
@@ -35,7 +45,7 @@ function InputForm() {
         onClick={handleSubmit}
         id="submit"
       ></input>
-    </>
+    </div>
   );
 }
 

@@ -1,11 +1,14 @@
 #notification-space {
   height: 50%;
+  margin-top: 1.5rem;
   overflow-y: auto;
-  width: 80%;
-  padding: 5px;
-  border: 2px solid rgb(128, 128, 128);
-  border-radius: 5px;
+  width: 40%;
+  padding: 10px;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 10px;
   box-sizing: border-box;
+  font-family: "Work Sans", sans-serif;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 p {
