@@ -1,8 +1,5 @@
-let idCounter = 0;
-
 function idGenerator() {
-  idCounter++;
-  return idCounter.toString();
+  return Math.random().toString(36);
 }
 
 export default idGenerator;
